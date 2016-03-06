@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve api of api.ilmnuri.com
+After=network.target
+
+[Service]
+User=nginx
+Group=nginx
+WorkingDirectory=/usr/share/nginx/html/api
+Environment="PATH=/bin"
+ExecStart=/bin/uwsgi --ini api.ini
+
+[Install]
+WantedBy=multi-user.target`
