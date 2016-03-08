@@ -4,6 +4,11 @@ import boto3
 
 
 def main():
+    """ 
+    Connects to the memcache first. Then puls the data from S3
+    Stores the data pulled from S3 to the memcache instance. 
+    I just placed a cronjob for this to run once a day.     
+    """
     client = memcache.Client([('127.0.0.1', 11211)])
 
     s3 = boto3.resource('s3')

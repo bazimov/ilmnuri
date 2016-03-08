@@ -1,4 +1,9 @@
 #!/usr/bin/python
+"""
+This is the main api flask app.
+It connects to the memcache (memcache must me running) and get the data.
+Parses the data fetched from memcache and then displays as json format.
+"""
 from flask import Flask, jsonify
 import memcache
 import os
