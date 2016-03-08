@@ -20,6 +20,10 @@ We will need to install some system packages first.
 # rpm -ivh epel-release-7-5.noarch.rpm
 sudo yum install -y nginx memcached python-devel python-pip gcc 
 sudo pip install flask uwsgi python-memcached 
+sudo systemctl enable memcached && sudo systemctl start memcached
+sudo systemctl enable nginx && sudo systemctl start nginx
+# enable and start for other services needed. Once you create system file in /etc/systemd/system/<somename>.service
+# sudo systemctl enable somename && sudo systemctl start somename
 ```
 ### Installation
 
@@ -28,3 +32,7 @@ Here is the guide: [link](https://www.digitalocean.com/community/tutorials/how-t
 Systemd file is located in the repo's system directory. 
 All other files are as well included. 
 
+### Troubleshooting
+* make sure memcached, nginx, serviceFile up and running
+* after code change or anything make sure restarting the serviceFile and reload nginx
+* check nginx logs or try running the flask app in debug mode. 
