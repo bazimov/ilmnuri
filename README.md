@@ -1,14 +1,13 @@
 ## API of the ilmnuri.com
 * This is the source code of api ilmnuri.com for its android mobile app.
-* Android app url: https://play.google.com/store/apps/details?id=com.ilmnuri.com
+* Android app url: [ilm nuri](https://play.google.com/store/apps/details?id=com.ilmnuri.com)
 * Website: www.ilmnuri.com
 * Temporary api: api.azimov.xyz/api/v1.0/albums
 * Android app name: "ilm nuri" in playstore
 
-###  We are running Nginx + Flask for the API on EC2 instance. 
-
 ### System Requirements
-We will need to install some system packages first.
+We are running Nginx + Flask for the API on EC2 instance. 
+We will need to install some system packages first and start them.
 
 ```bash
 # RHEL based system VM, if you do not have repo do below.
