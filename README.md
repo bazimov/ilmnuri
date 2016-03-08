@@ -2,7 +2,7 @@
 * This is the source code of api ilmnuri.com for its android mobile app.
 * Android app url: [ilm nuri](https://play.google.com/store/apps/details?id=com.ilmnuri.com)
 * Website: www.ilmnuri.com
-* Temporary api: api.azimov.xyz/api/v1.0/albums
+* Temporary api url: [api.azimov.xyz](http://api.azimov.xyz/api/v1.0/albums)
 * Android app name: "ilm nuri" in playstore
 
 ### System Requirements
