@@ -42,7 +42,7 @@ def get_tasks():
 
     if not dictionary:
         log.error('Dictionary empty, executing the script.')
-        os.system('/opt/boto_get_albums.py')
+        os.system('su - ec2-user "/opt/boto_get_albums.py"')
 
     for key, value in dictionary.items():
         i = 1
@@ -57,7 +57,7 @@ def get_tasks():
             i += 1
 
     log.info('Rendering the main albums page.')
-    return jsonify({'albums': albums})
+    return jsonify({'albums': sorted(albums)})
 
 
 @app.route('/api/v1.0/albums/<teacher>/', methods=['GET'])
@@ -69,7 +69,7 @@ def get_teacher(teacher):
 
     if not dictionary:
         log.error('Dictionary empty, executing the script.')
-        os.system('/opt/boto_get_albums.py')
+        os.system('su - ec2-user -c "/opt/boto_get_albums.py"')
 
     for key, value in dictionary.items():
         if key == teacher:
@@ -85,7 +85,7 @@ def get_teacher(teacher):
                 i += 1
 
     log.info('Rendering the category {0} page.'.format(teacher))
-    return jsonify({'albums': albums})
+    return jsonify({'albums': sorted(albums)})
 
 
 if __name__ == '__main__':
