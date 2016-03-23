@@ -88,5 +88,31 @@ def get_teacher(teacher):
     return jsonify({'albums': sorted(albums)})
 
 
+@app.route('/api/ios/albums/<teacher>/', methods=['GET'])
+def ios_teacher(teacher):
+    client = memcache.Client([('127.0.0.1', 11211)])
+    log.debug('connecting to memcache.')
+    dictionary = client.get('album')
+    albums = []
+
+    for key, value in dictionary.items():
+        if key == teacher:
+            i = 1
+            for k, v in value.items():
+                output = {
+                    'id': i,
+                    'category': key,
+                    'album': k,
+                    'items': [{'name': x,
+                               'url': 'http://dfh59cyusxnu7.cloudfront.net/{0}/'
+                                      '{1}/{2}'.format(key, k, x)} for x in v]
+                }
+                albums.append(output)
+                i += 1
+
+    log.info('Rendering the category {0} page.'.format(teacher))
+    return jsonify({'albums': sorted(albums)})
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='0.0.0.0', debug=True)
