@@ -4,12 +4,22 @@ This is the main api flask app.
 It connects to the memcache (memcache must me running) and get the data.
 Parses the data fetched from memcache and then displays as json format.
 """
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import memcache
 import os
 import logging
+import sqlite3
 
 app = Flask(__name__)
+
+DATABASE = 'tokens.db'
+
+def insert_token(argument):
+    con = sqlite3.connect(DATABASE)
+    cur = con.cursor()
+    cur.execute("INSERT INTO token_table (data) VALUES (?)", (argument,))
+    con.commit()
+    con.close()
 
 log_dir = '/var/log/apiilmnuri/'
 
@@ -42,7 +52,7 @@ def get_tasks():
 
     if not dictionary:
         log.error('Dictionary empty, executing the script.')
-        os.system('su - ec2-user "/opt/boto_get_albums.py"')
+        os.system('/opt/boto_get_albums.py')
 
     for key, value in dictionary.items():
         i = 1
@@ -55,7 +65,6 @@ def get_tasks():
             }
             albums.append(output)
             i += 1
-
     log.info('Rendering the main albums page.')
     return jsonify({'albums': sorted(albums)})
 
@@ -69,7 +78,7 @@ def get_teacher(teacher):
 
     if not dictionary:
         log.error('Dictionary empty, executing the script.')
-        os.system('su - ec2-user -c "/opt/boto_get_albums.py"')
+        os.system('/opt/boto_get_albums.py')
 
     for key, value in dictionary.items():
         if key == teacher:
@@ -103,15 +112,22 @@ def ios_teacher(teacher):
                     'id': i,
                     'category': key,
                     'album': k,
-                    'items': [{'name': x,
+                    'items': [{'name': x, 
                                'url': 'http://dfh59cyusxnu7.cloudfront.net/{0}/'
                                       '{1}/{2}'.format(key, k, x)} for x in v]
                 }
                 albums.append(output)
                 i += 1
 
-    log.info('Rendering the category {0} page.'.format(teacher))
+    log.info('Rendering the category {0} page on ios.'.format(teacher))
     return jsonify({'albums': sorted(albums)})
+
+
+@app.route('/tokens/<uuid>', methods=['POST'])
+def token(uuid):
+    token_id = request.json
+    insert_token(token_id['data'])
+    return jsonify({'uuid': uuid})
 
 
 if __name__ == '__main__':
