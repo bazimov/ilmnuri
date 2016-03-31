@@ -11,11 +11,11 @@ import logging
 import sqlite3
 
 app = Flask(__name__)
+database = '/usr/share/nginx/html/api/app/tokens.db'
 
-DATABASE = 'tokens.db'
 
 def insert_token(argument):
-    con = sqlite3.connect(DATABASE)
+    con = sqlite3.connect(database)
     cur = con.cursor()
     cur.execute("INSERT INTO token_table (data) VALUES (?)", (argument,))
     con.commit()
