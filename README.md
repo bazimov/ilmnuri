@@ -2,8 +2,10 @@
 * This is the source code of api ilmnuri.com for its android mobile app.
 * Android app url: [ilm nuri](https://play.google.com/store/apps/details?id=com.ilmnuri.com)
 * Website: www.ilmnuri.com
-* Temporary api url: [api.azimov.xyz](http://api.azimov.xyz/api/v1.0/albums)
+* Developer website: [ilmnuri.net](http://ilmnuri.net)
+* Temporary api url: [api.ilmnuri.net](http://api.ilmnuri.net/api/v1.0/albums)
 * Android app name: "ilm nuri" in playstore
+* Apple iOS app name: "ilm nuri" in applestore
 
 ### System Requirements
 We are running Nginx + Flask for the API on EC2 instance. 
