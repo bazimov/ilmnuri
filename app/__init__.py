@@ -39,7 +39,7 @@ log = logging.getLogger(__name__)
 @app.route('/')
 def index():
     log.info('index page rendered.')
-    return '<h1>Please use full <a href="http://api.azimov.xyz/api/v1.0/' \
+    return '<h1>Please use full <a href="http://api.ilmnuri.net/api/v1.0/' \
            'albums/">url</a></h1>'
 
 
@@ -113,7 +113,7 @@ def ios_teacher(teacher):
                     'category': key,
                     'album': k,
                     'items': [{'name': x, 
-                               'url': 'http://dfh59cyusxnu7.cloudfront.net/{0}/'
+                               'url': 'http://ilmnuri.net/{0}/'
                                       '{1}/{2}'.format(key, k, x)} for x in v]
                 }
                 albums.append(output)
